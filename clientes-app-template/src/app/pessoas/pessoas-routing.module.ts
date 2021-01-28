@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutComponent } from '../layout/layout.component';
 import { PessoasFormComponent } from './pessoas-form/pessoas-form.component';
 import { PessoasListaComponent } from './pessoas-lista/pessoas-lista.component';
 
 
 const routes: Routes = [
-  {path: 'pessoa-form', component: PessoasFormComponent},
-  {path: 'pessoa-form/:id', component: PessoasFormComponent},
-  {path: 'pessoas', component: PessoasListaComponent}
+  {path: 'pessoas', component: LayoutComponent, children: [
+    {path: 'form', component: PessoasFormComponent},
+    {path: 'form/:id', component: PessoasFormComponent},
+    {path: 'lista', component: PessoasListaComponent},
+    {path: '', redirectTo : '/pessoas/lista', pathMatch: 'full'},
+  ]},
+  
 ];
 
 @NgModule({

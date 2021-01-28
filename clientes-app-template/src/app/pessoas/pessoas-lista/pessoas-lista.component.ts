@@ -23,7 +23,7 @@ export class PessoasListaComponent implements OnInit {
   }
 
   novoCadastro(){
-    this.router.navigate(['/pessoa-form'])
+    this.router.navigate(['/pessoas/form'])
   }
 
 }

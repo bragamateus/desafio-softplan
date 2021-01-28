@@ -39,8 +39,14 @@
                         <td>{{ pessoa.dataCadastro }}</td>
                         <td>
                             <button class="btn btn-primary" 
-                                    routerLink="/pessoa-form/{{ pessoa.id }}">
+                                    routerLink="/pessoa/form/{{ pessoa.id }}">
                                 <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger" 
+                                    data-toggle="modal" 
+                                    data-target="#modalDelete"
+                            >
+                                <i class="fa fa-trash"></i>
                             </button>
                         </td>
                     </tr>
@@ -48,5 +54,17 @@
             </table>
         </div>
 
+    </div>
+    <div id="modalDelete" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+                <div class="modal-body">
+                    hello
+                </div>
+            </div>
+        </div>
     </div>
 </div>
