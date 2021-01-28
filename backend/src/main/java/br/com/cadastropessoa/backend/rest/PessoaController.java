@@ -4,6 +4,7 @@ import br.com.cadastropessoa.backend.model.entity.Pessoa;
 import br.com.cadastropessoa.backend.model.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +16,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/pessoas")
+@CrossOrigin("http://localhost:4200")
 public class PessoaController {
 
     private final PessoaRepository pessoaRepository;
@@ -28,13 +33,19 @@ public class PessoaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Pessoa salvar(@RequestBody Pessoa pessoa){
+    public Pessoa salvar(@RequestBody @Valid Pessoa pessoa){
         return pessoaRepository.save(pessoa);
+    }
+
+    @GetMapping
+    public List<Pessoa> listarTodos(){
+        return pessoaRepository.findAll();
     }
 
     @GetMapping("{id}")
     public Pessoa buscarPorId(@PathVariable Integer id){
-        return pessoaRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return pessoaRepository.findById(id)
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
 
     @DeleteMapping("{id}")
@@ -46,12 +57,12 @@ public class PessoaController {
                     pessoaRepository.delete(cliente);
                     return Void.TYPE;
                 })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void editar(@PathVariable Integer id, @RequestBody Pessoa pessoaAtualizada){
+    public void editar(@PathVariable Integer id, @RequestBody @Valid Pessoa pessoaAtualizada){
 
         pessoaRepository
                 .findById(id)
@@ -59,7 +70,7 @@ public class PessoaController {
                     pessoaAtualizada.setId(pessoa.getId());
                     return pessoaRepository.save(pessoaAtualizada);
                 })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
     }
 }

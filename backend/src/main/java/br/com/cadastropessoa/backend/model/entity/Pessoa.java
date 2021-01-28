@@ -30,24 +30,24 @@ public class Pessoa {
     private Integer id;
 
     @Column(nullable = false, length = 150)
-    @NotEmpty
+    @NotEmpty(message = "{campo.nome.obrigatorio}")
     private String nome;
 
     @Email
     private String email;
 
     @Column(name = "data_nascimento")
-    @NotNull
+    @NotNull(message = "{campo.dataNascimento.obrigatorio}")
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
     private String naturalidade;
 
     private String nacionalidade;
 
     @Column(nullable = false, length = 11)
-    @NotNull
-    @CPF
+    @NotNull(message = "{campo.cpf.obrigatorio}")
+    @CPF(message = "{campo.cpf.invalido}")
     private String cpf;
 
     @Column(name = "data_cadastro", updatable = false)
