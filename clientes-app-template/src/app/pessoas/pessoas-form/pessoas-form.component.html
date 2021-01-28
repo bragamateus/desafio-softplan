@@ -1,0 +1,104 @@
+<h1 class="mt-4">{{ pessoa.id ? 'Edição ' : 'Cadastro '}} de Pessoa</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Formulário</li>
+</ol>
+<div class="container">
+    <form #pessoaForm="ngForm" (ngSubmit)="cadastrar()">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso == true">
+                    Pessoa cadastrada/atualizada com sucesso!
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of mensagensErro">
+                    {{erro}}
+                </div>
+        </div>
+        </div>    
+        <div class="row" *ngIf="pessoa.id">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>ID:</label>
+                    <input type="text" class="form-control" disabled=true [ngModel]="pessoa.id" name="id" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Data Cadastro:</label>
+                    <input type="text" class="form-control" disabled=true [ngModel]="pessoa.dataCadastro" name="dataCadastro" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nome: *</label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoa.nome" name="nome" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" class="form-control" [(ngModel)]="pessoa.email" name="email" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Naturalidade:</label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoa.naturalidade" name="naturalidade" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nacionalidade:</label>
+                    <input type="text" class="form-control" [(ngModel)]="pessoa.nacionalidade" name="nacionalidade" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Data Nascimento: *</label>
+                    <input type="text" class="form-control"
+                        [(ngModel)]="pessoa.dataNascimento" name="dataNascimento" 
+                        onkeypress="$(this).mask('00/00/0000');" />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>CPF: *</label>
+                    <input type="text" class="form-control" 
+                        [(ngModel)]="pessoa.cpf" name="cpf"
+                         />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" *ngIf="!pessoa.id">
+                    <i class=" fa fa-save"></i> Salvar
+                </button>
+            
+
+                <button type="submit" class="btn btn-primary" *ngIf="pessoa.id">
+                    <i class=" fa fa-sync-alt"></i> Editar
+                </button>
+
+            
+                <button type="button" class="btn btn-danger" (click)="voltarParaListagem()">
+                    <i class=" fa fa-arrow-alt-circle-left"></i> Voltar
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
