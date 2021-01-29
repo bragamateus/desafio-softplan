@@ -21,7 +21,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pessoas")
-@CrossOrigin("http://localhost:4200")
 public class PessoaController {
 
     private final PessoaRepository pessoaRepository;

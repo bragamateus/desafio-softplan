@@ -13,6 +13,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
 import { PessoasService } from './pessoas.service';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { LayoutComponent } from './layout/layout.component';
 
   ],
   providers: [
-    PessoasService
+    PessoasService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
