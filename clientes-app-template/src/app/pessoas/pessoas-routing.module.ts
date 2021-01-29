@@ -4,9 +4,11 @@ import { LayoutComponent } from '../layout/layout.component';
 import { PessoasFormComponent } from './pessoas-form/pessoas-form.component';
 import { PessoasListaComponent } from './pessoas-lista/pessoas-lista.component';
 
+import { AuthGuard } from '../auth.guard';
+
 
 const routes: Routes = [
-  {path: 'pessoas', component: LayoutComponent, children: [
+  {path: 'pessoas', component: LayoutComponent, canActivate: [AuthGuard], children: [
     {path: 'form', component: PessoasFormComponent},
     {path: 'form/:id', component: PessoasFormComponent},
     {path: 'lista', component: PessoasListaComponent},
