@@ -33,6 +33,11 @@ export class PessoasService {
   }
 
   getPessoasPorId(id: number): Observable<Pessoa>{
-    return this.http.get<any>(`http://localhost:8000/api/pessoas/${id}`);
+    const tokenString = localStorage.getItem('access_token')
+    const token = JSON.parse(tokenString)
+    const headers = {
+      'Authorization': 'Bearer ' + token.access_token
+    }
+    return this.http.get<any>(`http://localhost:8080/api/pessoas/${id}`, { headers });
   }
 }
